@@ -1,6 +1,8 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ulickflix.appfilmes">
     <application
-        android:label="app_filmes"
+        android:enableOnBackInvokedCallback="true"
+        android:label="UlickFlix"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

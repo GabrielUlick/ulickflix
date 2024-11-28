@@ -17,6 +17,7 @@ class SplashPage extends GetView<SplashController> {
         child: Container(
           width: Get.width,
           height: Get.height,
+          color: Colors.black,
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/images/background.png'),

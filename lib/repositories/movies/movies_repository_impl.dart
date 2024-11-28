@@ -19,16 +19,13 @@ class MoviesRepositoryImpl implements MoviesRepository {
     final result = await _restClient.get<List<MovieModel>>(
       '/movie/popular',
       query: <String, String>{
-        'api_key': FirebaseRemoteConfig.instance.getString('api_token'),
         'language': 'pt-br',
         'page': '1',
       },
       decoder: (data) {
         final results = data['results'];
         if (results != null) {
-          return results
-              .map<MovieModel>((result) => MovieModel.fromMap(result))
-              .toList();
+          return results.map<MovieModel>((result) => MovieModel.fromMap(result)).toList();
         }
         return <MovieModel>[];
       },
@@ -46,22 +43,18 @@ class MoviesRepositoryImpl implements MoviesRepository {
     final result = await _restClient.get<List<MovieModel>>(
       '/movie/top_rated',
       query: <String, String>{
-        'api_key': FirebaseRemoteConfig.instance.getString('api_token'),
         'language': 'pt-br',
         'page': '1',
       },
       decoder: (data) {
         final results = data['results'];
         if (results != null) {
-          return results
-              .map<MovieModel>(
-                (date) => MovieModel.fromMap(date),
-              )
-              .toList();
+          return results.map<MovieModel>((date) => MovieModel.fromMap(date)).toList();
         }
         return <MovieModel>[];
       },
     );
+
     if (result.hasError) {
       debugPrint('Erro ao buscar top_rated movies ${result.statusText}');
       throw Exception('Erro ao buscar filmes tops');
@@ -74,7 +67,6 @@ class MoviesRepositoryImpl implements MoviesRepository {
     final result = await _restClient.get<MovieDetailModel?>(
       '/movie/$id',
       query: {
-        'api_key': FirebaseRemoteConfig.instance.getString('api_token'),
         'language': 'pt-br',
         'append_to_response': 'images,credits',
         'include_image_language': 'en,pt-br',
@@ -83,6 +75,7 @@ class MoviesRepositoryImpl implements MoviesRepository {
         return MovieDetailModel.fromMap(data);
       },
     );
+
     if (result.hasError) {
       debugPrint('Erro ao buscar detalhes dos movies ${result.statusText}');
       throw Exception('Erro ao buscar detalhes dos filmes');
@@ -107,7 +100,7 @@ class MoviesRepositoryImpl implements MoviesRepository {
         favoriteData.docs.first.reference.delete();
       }
     } catch (e) {
-      debugPrint('Erro ao favoritar um filme');
+      debugPrint('Erro ao favoritar um filme: $e');
       rethrow;
     }
   }
@@ -121,9 +114,7 @@ class MoviesRepositoryImpl implements MoviesRepository {
         .get();
     final listFavorities = <MovieModel>[];
     for (var movie in favoritiesMovies.docs) {
-      listFavorities.add(
-        MovieModel.fromMap(movie.data()),
-      );
+      listFavorities.add(MovieModel.fromMap(movie.data()));
     }
     return listFavorities;
   }

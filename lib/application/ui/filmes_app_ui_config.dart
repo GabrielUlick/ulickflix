@@ -9,10 +9,10 @@ class FilmesAppUiConfig {
         scaffoldBackgroundColor: Colors.white,
         fontFamily: 'Metropolis',
         appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.black,
           iconTheme: IconThemeData(color: Colors.black),
           titleTextStyle: TextStyle(
-            color: Color(0xff222222),
+            color: Color.fromARGB(255, 255, 255, 255),
             fontSize: 18,
             fontWeight: FontWeight.w500,
           ),

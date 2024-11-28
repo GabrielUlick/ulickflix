@@ -159,4 +159,5 @@ class MoviesController extends GetxController with MessagesMixin {
     }
     return {};
   }
+  
 }
